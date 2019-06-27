@@ -1,1 +1,1 @@
-# hierarchical-state-machine
+# Hierarchical State Machine
