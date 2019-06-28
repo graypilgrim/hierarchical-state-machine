@@ -18,6 +18,8 @@ class State : public std::enable_shared_from_this<State>
     void setDefaultChild(size_t childId);
     std::shared_ptr<State> getDefaultChild();
     std::weak_ptr<State> getParent();
+    void activate();
+    void deactivate();
 
     protected:
     std::string name_;

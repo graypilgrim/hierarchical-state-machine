@@ -39,3 +39,13 @@ std::weak_ptr<State> State::getParent()
 {
     return parent_;
 }
+
+void State::activate()
+{
+    if (onActivate_) onActivate_();
+}
+
+void State::deactivate()
+{
+    if (onDeactivate_) onDeactivate_();
+}
