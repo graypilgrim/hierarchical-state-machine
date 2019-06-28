@@ -4,6 +4,11 @@ Event::Event(std::string type)
     : type_(std::move(type))
 {}
 
+std::string Event::getType() const
+{
+    return type_;
+}
+
 std::vector<unsigned char> Event::serialize()
 {
     auto ret = std::vector<unsigned char>{type_.begin(), type_.end()};

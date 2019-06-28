@@ -9,6 +9,7 @@ class Event
     public:
     Event() = default;
     Event(std::string type);
+    std::string getType() const;
     std::vector<unsigned char> serialize();
 
     protected:
