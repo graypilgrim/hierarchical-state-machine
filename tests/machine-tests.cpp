@@ -50,10 +50,11 @@ TEST_CASE( "State machine", "[State machine]" ) {
         stateOn->setDefaultChild(0);
 
         MockedMachine mm;
-        mm.addTranstition(stateOff, "PowerOn", stateOn);
-        mm.addTranstition(stateOn, "PowerOff", stateOff);
-        mm.addTranstition(stateStopped, "Start", statePlaying);
-        mm.addTranstition(statePlaying, "Stop", stateStopped);
+        mm.setTransitionTable({{stateOff, "PowerOn", stateOn},
+                               {stateOn, "PowerOff", stateOff},
+                               {stateStopped, "Start", statePlaying},
+                               {statePlaying, "Stop", stateStopped}
+                               });
         mm.setStartState(stateOff);
         REQUIRE(mm.getCurrentState().get() == stateOff.get());
 

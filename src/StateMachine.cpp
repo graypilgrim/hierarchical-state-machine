@@ -7,7 +7,7 @@
 #include <sstream>
 #include <iostream>
 
-void StateMachine::addTranstition(const std::shared_ptr<State> &from, std::string eventType, const std::shared_ptr<State> &to)
+void StateMachine::addTranstition(const std::shared_ptr<State> &from, const std::string &eventType, const std::shared_ptr<State> &to)
 {
     auto insertion = transitionTable_.emplace(TransitionTableKey{from, eventType}, to);
     if (!insertion.second) {
@@ -15,6 +15,14 @@ void StateMachine::addTranstition(const std::shared_ptr<State> &from, std::strin
         ss << "Transition from state \"" << from->getName() << "\" in case of event \"" << eventType << "\" already exists";
         throw std::logic_error(ss.str().c_str());
     }
+}
+
+void StateMachine::setTransitionTable(const std::vector<TransitionTableEntry> &table)
+{
+    transitionTable_.clear();
+
+    for (auto it : table)
+        addTranstition(std::get<0>(it), std::get<1>(it), std::get<2>(it));
 }
 
 void StateMachine::setStartState(std::shared_ptr<State> state)

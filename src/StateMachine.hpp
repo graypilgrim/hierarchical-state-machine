@@ -8,6 +8,7 @@
 #include <memory>
 
 using TransitionTableKey = std::pair<std::shared_ptr<State>, std::string>;
+using TransitionTableEntry = std::tuple<std::shared_ptr<State>, std::string, std::shared_ptr<State>>;
 
 template <>
 struct std::hash<TransitionTableKey>
@@ -26,7 +27,8 @@ class StateMachine
 {
     public:
     StateMachine() = default;
-    void addTranstition(const std::shared_ptr<State> &from, std::string eventType, const std::shared_ptr<State> &to);
+    void addTranstition(const std::shared_ptr<State> &from, const std::string &eventType, const std::shared_ptr<State> &to);
+    void setTransitionTable(const std::vector<TransitionTableEntry> &table);
     void setStartState(std::shared_ptr<State> state);
     void run();
 
