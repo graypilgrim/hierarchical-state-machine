@@ -49,11 +49,11 @@ std::unique_ptr<Event> Event::deserialize(const std::vector<unsigned char> &data
     }
 
     if (type.empty())
-        throw std::runtime_error("No type in received data");
+        throw std::logic_error("No type in received data");
 
     auto search = deserializers_.find(type);
     if (search == deserializers_.end())
-        throw std::runtime_error("No function to create object found.");
+        throw std::logic_error("No function to create object found.");
 
     return search->second(type, {it + 1, data.end()});
 }

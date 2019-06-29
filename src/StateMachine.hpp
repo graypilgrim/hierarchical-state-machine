@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <memory>
 
-using TransitionTableKey = std::pair<std::shared_ptr<State>, Event>;
+using TransitionTableKey = std::pair<std::shared_ptr<State>, std::string>;
 
 template <>
 struct std::hash<TransitionTableKey>
@@ -18,7 +18,7 @@ struct std::hash<TransitionTableKey>
         using std::string;
         using std::shared_ptr;
 
-        return ((hash<shared_ptr<State>>()(key.first) ^ (hash<string>()(key.second.getType()) << 1)) >> 1);
+        return ((hash<shared_ptr<State>>()(key.first) ^ (hash<string>()(key.second) << 1)) >> 1);
     }
 };
 
@@ -26,6 +26,7 @@ class StateMachine
 {
     public:
     StateMachine() = default;
+    void addTranstition(const std::shared_ptr<State> &from, std::string eventType, const std::shared_ptr<State> &to);
 
     protected:
     std::unordered_map<TransitionTableKey, std::shared_ptr<State>> transitionTable_;

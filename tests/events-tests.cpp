@@ -23,7 +23,7 @@ class ExtendedTestEvent : public Event
             else if (data[0] == '1')
                 e->value = true;
             else
-                throw std::runtime_error("Value cannot be determined.");
+                throw std::logic_error("Value cannot be determined.");
             return e;
         });
     }
