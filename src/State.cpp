@@ -1,13 +1,10 @@
 #include "State.hpp"
 
 #include <cassert>
+#include <iostream>
 
-State::State(std::string name, std::weak_ptr<State> parent)
-    : name_(std::move(name)), parent_(std::move(parent))
-{}
-
-State::State(std::string name, std::weak_ptr<State> parent, std::vector<std::shared_ptr<State>> children, size_t defaultChild)
-    : name_(std::move(name)), parent_(std::move(parent)), children_(std::move(children)), defaultChild_(defaultChild)
+State::State(std::string name)
+    : name_(std::move(name))
 {}
 
 std::string State::getName() const

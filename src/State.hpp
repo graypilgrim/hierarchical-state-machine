@@ -11,8 +11,7 @@ class State : public std::enable_shared_from_this<State>
 {
     public:
     State() = default;
-    State(std::string name, std::weak_ptr<State> parent = {});
-    State(std::string name, std::weak_ptr<State> parent, std::vector<std::shared_ptr<State>> children, size_t defaultChild);
+    State(std::string name);
     std::string getName() const;
     void addChild(const std::shared_ptr<State> &state);
     void setDefaultChild(size_t childId);

@@ -5,8 +5,8 @@
 class TestState : public State
 {
     public:
-    TestState(std::string name, std::weak_ptr<State> parent = {})
-        : State(name, parent)
+    TestState(std::string name)
+        : State(name)
     {
         onActivate_ = [this]() {
             activated = true;
@@ -24,7 +24,8 @@ class TestState : public State
 TEST_CASE( "States hierarchy", "[states]" ) {
     SECTION( "States creation" ) {
         auto s1 = std::make_shared<State>("s1");
-        auto s2 = std::make_shared<State>("s2", s1);
+        auto s2 = std::make_shared<State>("s2");
+        s1->addChild(s2);
 
         auto p = s2->getParent().lock();
         assert(p);
