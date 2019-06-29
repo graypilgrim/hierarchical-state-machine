@@ -15,7 +15,7 @@ class Event
     protected:
     virtual std::vector<unsigned char> serializeImpl();
 
-    std::string type_;
+    const std::string type_;
     static const char SEPARATOR_ = ';';
 
 };
