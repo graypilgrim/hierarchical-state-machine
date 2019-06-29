@@ -27,9 +27,15 @@ class StateMachine
     public:
     StateMachine() = default;
     void addTranstition(const std::shared_ptr<State> &from, std::string eventType, const std::shared_ptr<State> &to);
+    void setStartState(std::shared_ptr<State> state);
+    void run();
 
     protected:
+    void makeTransition(const std::string &eventType);
+    void chooseCurrentState(std::shared_ptr<State> state);
+
     std::unordered_map<TransitionTableKey, std::shared_ptr<State>> transitionTable_;
+    std::shared_ptr<State> currentState_;
 };
 
 #endif

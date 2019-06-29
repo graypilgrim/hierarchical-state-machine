@@ -1,5 +1,7 @@
 #include "Event.hpp"
 
+#include "configuration.hpp"
+
 #include <exception>
 
 std::unordered_map<std::string, std::function<std::unique_ptr<Event>(std::string, std::vector<unsigned char>)>> Event::deserializers_ = {};
@@ -23,6 +25,9 @@ std::vector<unsigned char> Event::serialize()
     auto data = serializeImpl();
     ret.push_back(SEPARATOR_);
     ret.insert(ret.end(), data.begin(), data.end());
+
+    if (ret.size() > configuration::MESSAGE_SIZE)
+        throw std::logic_error("Serialized event size bigger than maximum message size.");
 
     return ret;
 }

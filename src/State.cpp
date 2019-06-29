@@ -18,6 +18,7 @@ std::string State::getName() const
 void State::addChild(const std::shared_ptr<State> &state)
 {
     children_.push_back(state);
+    state->parent_ = shared_from_this();
 }
 
 void State::setDefaultChild(size_t childId)
