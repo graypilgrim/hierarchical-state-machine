@@ -10,6 +10,7 @@ Event::Event(std::string type)
     : type_(std::move(type))
 {
     deserializers_.insert({type_, [](std::string type, std::vector<unsigned char> data){
+        (void)data;
         return std::make_unique<Event>(type);
     }});
 }
@@ -39,7 +40,7 @@ std::vector<unsigned char> Event::serializeImpl()
 
 void Event::registerDeserializer(std::function<std::unique_ptr<Event>(std::string, std::vector<unsigned char>)> fun)
 {
-    auto insertion = Event::deserializers_.insert_or_assign(type_, std::move(fun));
+    Event::deserializers_.insert_or_assign(type_, std::move(fun));
 }
 
 std::unique_ptr<Event> Event::deserialize(const std::vector<unsigned char> &data)

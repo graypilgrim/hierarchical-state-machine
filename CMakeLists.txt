@@ -6,9 +6,5 @@ set(BINARY_FILE "hsm")
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
-add_executable("${BINARY_FILE}" "${PROJECT_SOURCE_DIR}/src/main.cpp")
-
-target_link_libraries("${BINARY_FILE}" SOURCE_OBJS)
-
 add_subdirectory(src)
 add_subdirectory(tests)
